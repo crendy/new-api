@@ -10,11 +10,11 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"time"
+
 	"github.com/QuantumNous/new-api/common"
 	"github.com/QuantumNous/new-api/model"
 	"github.com/QuantumNous/new-api/setting"
-	"time"
-
 	"github.com/gin-gonic/gin"
 	"github.com/thanhpk/randstr"
 )

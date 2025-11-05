@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/QuantumNous/new-api/common"
+	common2 "github.com/QuantumNous/new-api/common"
 	"github.com/QuantumNous/new-api/constant"
 	"github.com/QuantumNous/new-api/dto"
 	"github.com/QuantumNous/new-api/logger"
@@ -66,6 +67,14 @@ func Relay(c *gin.Context, relayFormat types.RelayFormat) {
 	requestId := c.GetString(common.RequestIdKey)
 	group := common.GetContextKeyString(c, constant.ContextKeyUsingGroup)
 	originalModel := common.GetContextKeyString(c, constant.ContextKeyOriginalModel)
+	if common2.DebugEnabled {
+		// 打印HTTP原始请求信息
+		println("Relay请求 - URL ", c.Request.Method, c.Request.Host, c.Request.URL.String())
+		requestBody, _ := common.GetRequestBody(c)
+		requestBodyStr := strings.Replace(string(requestBody), "\n", "", -1)
+		requestBodyStrNew := strings.Replace(requestBodyStr, " ", "", -1)
+		println("Relay请求 - Body: ", requestBodyStrNew)
+	}
 
 	var (
 		newAPIError *types.NewAPIError
